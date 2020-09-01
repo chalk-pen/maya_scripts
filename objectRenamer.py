@@ -1,9 +1,9 @@
 from maya import cmds
 
 SUFFIXES = {
-    "mesh" = "geo",
-    "joint" = "jnt",
-    "camera" = None
+    "mesh": "geo",
+    "joint": "jnt",
+    "camera": None
 }
 
 DEFAULT_SUFFIX = "grp"
