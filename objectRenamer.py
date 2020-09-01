@@ -3,7 +3,8 @@ from maya import cmds
 SUFFIXES = {
     "mesh": "geo",
     "joint": "jnt",
-    "camera": None
+    "camera": None,
+    "ambientLight": "lgt"
 }
 
 DEFAULT_SUFFIX = "grp"
@@ -26,16 +27,6 @@ def rename():
             objType = cmds.objectType(child)
         else:
             objType = cmds.objectType(obj)
-
-        if objType == "mesh":
-            suffix = "geo"
-        elif objType == "joint":
-            suffix == "jnt"
-        elif objType == "camera":
-            print "Skipping camera"
-            continue
-        else:
-            suffix = "grp"
 
         suffix = SUFFIXES.get(objType, DEFAULT_SUFFIX)
 
