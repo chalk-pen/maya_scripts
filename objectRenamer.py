@@ -9,15 +9,23 @@ SUFFIXES = {
 
 DEFAULT_SUFFIX = "grp"
 
-def rename():
-    selection = cmds.ls(sl=True)
+def rename(selection=False):
+    """
+    This function have rename any objects to have the correct suffix
+    Args:
+        selection: Wether or not we use current selection
 
-    if len(selection) == 0:
-        selection = cmds.ls(dag=True, long=True)
+    Returns:
+        A list of all the objects we operated on
+    """
+    objects = cmds.ls(sl=selection, dag=True, long=True)
 
-    selection.sort(key=len, reverse=True)
+    if selection and not objects:
+        raise RuntimeError("You don't have anything selected! How dare you?!")
 
-    for obj in selection:
+    objects.sort(key=len, reverse=True)
+
+    for obj in objects:
         short_name = obj.split("|")[-1]
 
         children = cmds.listRelatives(obj, children=True, fullPath=True) or []
@@ -33,9 +41,14 @@ def rename():
         if not suffix:
             continue
 
-        if obj.endswith(suffix):
+        if obj.endswith('_'+suffix):
             continue
 
-        newName = short_name + "_" + suffix
+        newName = "%s_%s" % (short_name, suffix)     #short_name + "_" + suffix
 
         cmds.rename(obj, newName)
+
+        index = objects.index(obj)
+        objects[index] = obj.replace(short_name, newName)
+
+    return objects
