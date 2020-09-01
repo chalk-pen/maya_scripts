@@ -40,3 +40,52 @@ def showWindow():
         cmds.deleteUI(name)
     cmds.window(name, vis=True)
     cmds.showWindow()
+
+    column = cmds.columnLayout()
+    cmds.frameLayout(label="Choose an object type")
+
+    cmds.columnLayout()
+    cmds.radioCollection("objectCreationType")
+    cmds.radioButton(label="Sphere")
+    cmds.radioButton(label="Cube", select=True)
+    cmds.radioButton(label="Cone")
+    cmds.radioButton(label="Cylinder")
+
+    cmds.intField("numObjects", value=4)
+
+    cmds.setParent(column)
+    frame = cmds.frameLayout("Choose your max range")
+
+    cmds.gridLayout(numberOfColumns=2, cellWidth=100)
+
+    for axis in 'xyz':
+        cmds.text(label="%s axis" % axis)
+        cmds.floatField("%sAxisField" % axis, value=random.uniform(0, 10))
+
+    cmds.setParent(frame)
+    cmds.rowLayout(numberOfColumns=2)
+
+    cmds.radioCollection("randomMode")
+    cmds.radioButton(label="Absolute", select=True)
+    cmds.radioButton(label="Relative")
+
+    cmds.setParent(column)
+    cmds.rowLayout(numberOfColumns=2)
+    cmds.button(label="Create", command=onCreateClick)
+    cmds.button(label="Randomize")
+
+def onCreateClick(*args):
+    print ("Create button clicked")
+    print ("hi")
+    'hi'
+    "You"
+    "Santa"
+    "Hi"
+    "Print"
+    "Print"
+    "Print"
+    "Print"
+    "Print"
+    "Print"
+    "Print"
+    "Print"
