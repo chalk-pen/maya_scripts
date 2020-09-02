@@ -20,6 +20,7 @@ def rename(selection=False):
     """
     objects = cmds.ls(sl=selection, dag=True, long=True)
 
+    # This function cannot run if there is no selection and no objects
     if selection and not objects:
         raise RuntimeError("You don't have anything selected! How dare you?!")
 
@@ -44,7 +45,7 @@ def rename(selection=False):
         if obj.endswith('_'+suffix):
             continue
 
-        newName = "%s_%s" % (short_name, suffix)     #short_name + "_" + suffix
+        newName = "%s_%s" % (short_name, suffix)
 
         cmds.rename(obj, newName)
 
