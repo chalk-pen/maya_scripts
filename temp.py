@@ -1,3 +1,6 @@
+import shutil
+import glob
+
 class Robot:
     def __init__(self, name, color):
         self.name = name
@@ -16,3 +19,4 @@ robot_first.say()
 from maya import cmds
 import pymel.core as pm
 cmds.polyCube()
+
